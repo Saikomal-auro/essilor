@@ -1,0 +1,10 @@
+runtime: nodejs20  # Ensure you're using Node.js 20 (or latest)
+service: essilordemo
+
+handlers:
+  - url: /
+    static_files: dist/index.html
+    upload: dist/index.html
+
+  - url: /
+    static_dir: dist

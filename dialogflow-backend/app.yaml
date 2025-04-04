@@ -1,0 +1,8 @@
+runtime: python312  # Latest supported Python version
+service: default
+
+entrypoint: uvicorn main:app --host 0.0.0.0 --port 8080  
+
+instance_class: F4  # Allocates 2 CPU & 2GB RAM
+
+

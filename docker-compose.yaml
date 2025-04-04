@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    image: asia-south1-docker.pkg.dev/friendly-aurora-453216-f4/backend-repo/backend-image   # Replace with your backend image
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+
+  frontend:
+    image: asia-south1-docker.pkg.dev/friendly-aurora-453216-f4/frontend-repo/frontend-image  # Replace with your frontend image
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend  # Ensures backend starts before frontend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

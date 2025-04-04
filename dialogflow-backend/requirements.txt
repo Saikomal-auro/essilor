@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+google-cloud-firestore
+python-dotenv
+sentence-transformers
+chromadb
+pandas
+regex
+agno
+groq
+gunicorn
+google-cloud-storage
