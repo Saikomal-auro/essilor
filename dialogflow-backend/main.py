@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 
 # 🔹 Load environment variables
 load_dotenv()
-os.environ["GROQ_API_KEY"] = "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"
+os.environ["GROQ_API_KEY"] = "anta vadhu"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service-account.json"
 
 # 🔹 Firestore Project ID
