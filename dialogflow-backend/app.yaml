@@ -1,8 +1,21 @@
+# runtime: python312  # Latest supported Python version
+# service: backendnami
+
+# entrypoint: uvicorn main:app --host 0.0.0.0 --port 8080  
+
+# instance_class: F4  # Allocates 2 CPU & 2GB RAM
+
+
 runtime: python312  # Latest supported Python version
-service: default
-
-entrypoint: uvicorn main:app --host 0.0.0.0 --port 8080  
-
+service: backendnami
+entrypoint: uvicorn main:app --host 0.0.0.0 --port 8080
 instance_class: F4  # Allocates 2 CPU & 2GB RAM
 
+readiness_check:
+  path: "/_ah/health"
+  check_interval_sec: 30
+  timeout_sec: 60
+  failure_threshold: 10
+  success_threshold: 1
+  app_start_timeout_sec: 1800  # 30 minutes instead of default 10
 
