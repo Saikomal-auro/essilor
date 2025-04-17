@@ -21,11 +21,14 @@ logger = logging.getLogger(__name__)
 
 # 🔹 Load environment variables
 load_dotenv()
-os.environ["GROQ_API_KEY"] = "anta vadhu"
+os.environ["GROQ_API_KEY"] = "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"
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "service-account.json"
+# os.environ["FIRESTORE_PROJECT_ID"] = "essilor-test-455711"
+
+
 
 # 🔹 Firestore Project ID
-FIRESTORE_PROJECT_ID = os.getenv("FIRESTORE_PROJECT_ID", "your-gcp-project-id")
+FIRESTORE_PROJECT_ID = os.getenv("FIRESTORE_PROJECT_ID","essilor-test-455711")
 if not FIRESTORE_PROJECT_ID:
     raise ValueError("🚨 FIRESTORE_PROJECT_ID environment variable is not set!")
 
@@ -46,7 +49,7 @@ model = SentenceTransformer("all-MiniLM-L6-v2", device="cuda" if os.environ.get(
 
 
 chroma_client = chromadb.PersistentClient(path="/tmp/chroma_db")  # Store DB in writable location
-new_collection = chroma_client.get_or_create_collection(name="products_v6")
+new_collection = chroma_client.get_or_create_collection(name="essilor48737905")
 
 
 # 🔹 Load product data
@@ -166,7 +169,7 @@ def chatbot(user_input, conversation_history):
     
     if the user input can be answered from the conversation history, dont run retrieval
     
-    if the user changes their intent by asking for something completely different, you need to forget the previous conversation. 
+    
     Conversation History:
     {conversation_history}
  
@@ -175,8 +178,7 @@ def chatbot(user_input, conversation_history):
     Before responding, determine if the user is asking about glasses.
     Before responding, make sure that the product the user is looking for is actually in the database when run_retrieval= true. **Do not hallucinate**.
     If yes, return a JSON response in the **exact** format below:
-    if the user changes their intent by asking for something completely different, you need to forget the conversation history.
-
+    
     {{
       "chatbot_response": "Your response here.",
       "run_retrieval": true or false
@@ -208,7 +210,6 @@ def chatbot(user_input, conversation_history):
             - When you recommend a product to a user, you need to logically explain *why* you're recommending the product in 1-2 lines.
             - Given this information, generate a conversational response summarizing the best product options for the user in 3-4 lines. **Do not hallucinate.**
             If a product does not exist in the database, tell the user that and then give a similar product recommendation.
-            if the user changes their intent by asking for something completely different, you should not mention their previous intent
             
             - Respond in JSON format with a list of products having the following structure:
  
